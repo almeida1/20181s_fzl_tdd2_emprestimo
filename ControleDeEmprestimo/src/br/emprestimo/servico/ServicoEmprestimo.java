@@ -18,7 +18,7 @@ public class ServicoEmprestimo {
 			emprestimo.setUsuario(usuario);
 			// data do emprestimo - data atual do sistema
 			DateTime dataAtual = new DateTime();
-			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-YYYY");
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
 			emprestimo.setDataEmprestimo(dataAtual.toString(fmt));
 			// prazo de devolucao 8 dias
 			DateTime dataDevolucao = fmt.parseDateTime(emprestimo.getDataEmprestimo());

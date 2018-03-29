@@ -55,7 +55,7 @@ public class UC01RegistraEmprestimoDeLivro {
 	@Test
 	public void CT04UC01FB_registrar_emprestimo_com_sucesso_validacao_da_data() {
 		//acao
-		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd-MM-YYYY");
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
 		String dataEsperada = new DateTime().plusDays(8).toString(fmt);
 		emprestimo = servico.empresta(livro, usuario);
 		String dataObtida = emprestimo.getDataDevolucao();
