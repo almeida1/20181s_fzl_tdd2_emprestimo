@@ -63,7 +63,7 @@ public class UC01RegistraEmprestimoDeLivro {
 	    assertTrue(dataEsperada.equals(dataObtida));
 	}
 	@Test
-	public void CT05Verificar_o_metodo_getRA() {
-		assertEquals("11111", usuario.getRa());
+	public void CT05UC01FB_registrar_emprestimo_com_data_invalida() {
+		assertTrue(emprestimo.validaData("29-03-2000"));
 	}
 }
