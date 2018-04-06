@@ -41,7 +41,7 @@ public class UC01RegistraEmprestimoDeLivro {
 	}
 	@Test(expected=RuntimeException.class)
 	public void CT02UC01FB_registrar_emprestimo_com_dados_invalidos() {
-		assertNotNull(servico.empresta(null, usuario));
+		servico.empresta(null, usuario);
 	}
 	@Test
 	public void CT03UC01FB_registrar_emprestimo_com_dados_invalidos(){
@@ -64,6 +64,6 @@ public class UC01RegistraEmprestimoDeLivro {
 	}
 	@Test
 	public void CT05UC01FB_registrar_emprestimo_com_data_invalida() {
-		assertTrue(emprestimo.validaData("29-03-2000"));
+		assertTrue(emprestimo.validaData("29/03/2000"));
 	}
 }
