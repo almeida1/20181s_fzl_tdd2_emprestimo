@@ -23,10 +23,8 @@ public class UC01RegistraEmprestimoDeLivro {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//cenario
-		livro = new Livro();
-		livro.setIsbn("121212");
-		livro.setTitulo("Engenharia de Software");
-		livro.setAutor("Pressman");
+		livro = ObtemLivro.comDadosValidos();
+		
 		usuario = new Usuario();
 		usuario.setRa("11111");
 		usuario.setNome("Jose da Silva");
