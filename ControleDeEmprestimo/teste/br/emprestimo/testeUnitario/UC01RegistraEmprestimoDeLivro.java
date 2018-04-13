@@ -82,4 +82,8 @@ public class UC01RegistraEmprestimoDeLivro {
 	public void CT07UC01RegistrarEmprestimo_com_data_invalida() {
 		emprestimo.setDataEmprestimo("30/02/2000");
 	}
+	@Test
+	public void CT08UC01RegistrarEmprestimo_obtem_data_corrente(){
+		assertEquals("13/04/2018", emprestimo.setDataEmprestimo());
+	}
 }
