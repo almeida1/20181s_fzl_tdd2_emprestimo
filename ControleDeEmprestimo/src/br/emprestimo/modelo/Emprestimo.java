@@ -31,7 +31,10 @@ public class Emprestimo {
 	}
 
 	public void setDataEmprestimo(String dataEmprestimo) {
-		this.dataEmprestimo = dataEmprestimo;
+		if (validaData(dataEmprestimo))
+			this.dataEmprestimo = dataEmprestimo;
+		else
+			throw new RuntimeException("Data invalida");
 	}
 
 	public String getDataDevolucao() {
@@ -43,8 +46,8 @@ public class Emprestimo {
 	}
 
 	/**
-	 * * valida o formato da data * @param data no formato dd/MM/yyyy * @return true
-	 * se a data estiver no formato valido e false para formato invalido
+	 * * valida o formato da data * @param data no formato dd/MM/yyyy * @return
+	 * true se a data estiver no formato valido e false para formato invalido
 	 */
 	public boolean validaData(String data) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
