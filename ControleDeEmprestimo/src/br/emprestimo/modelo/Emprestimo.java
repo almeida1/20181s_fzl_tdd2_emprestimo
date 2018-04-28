@@ -68,4 +68,47 @@ public class Emprestimo {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
+		result = prime * result + ((dataEmprestimo == null) ? 0 : dataEmprestimo.hashCode());
+		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Emprestimo other = (Emprestimo) obj;
+		if (dataDevolucao == null) {
+			if (other.dataDevolucao != null)
+				return false;
+		} else if (!dataDevolucao.equals(other.dataDevolucao))
+			return false;
+		if (dataEmprestimo == null) {
+			if (other.dataEmprestimo != null)
+				return false;
+		} else if (!dataEmprestimo.equals(other.dataEmprestimo))
+			return false;
+		if (livro == null) {
+			if (other.livro != null)
+				return false;
+		} else if (!livro.equals(other.livro))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
+
 }
