@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 
+import br.emprestimo.modelo.Emprestimo;
 import br.emprestimo.modelo.Livro;
 import br.emprestimo.modelo.Usuario;
 import br.emprestimo.servico.ServicoEmprestimo;
@@ -20,7 +21,7 @@ public class UC01RegistrarEmprestimoDeLivroV2 {
 	private ServicoEmprestimo servico;
 	private Livro livro;
 	private Usuario usuario;
-	private boolean resultadoEsperado;
+	private String resultadoEsperado;
 
 	@Before
 	public void initialize() {
@@ -30,7 +31,7 @@ public class UC01RegistrarEmprestimoDeLivroV2 {
 	// Every time runner triggers, it will pass the arguments
 	// from parameters we defined in primeNumbers() method
 
-	public UC01RegistrarEmprestimoDeLivroV2(Livro umLivro, Usuario umUsuario, boolean resultadoEsperado) {
+	public UC01RegistrarEmprestimoDeLivroV2(Livro umLivro, Usuario umUsuario, String resultadoEsperado) {
 		this.livro = umLivro;
 		this.usuario = umUsuario;
 		this.resultadoEsperado = resultadoEsperado;
@@ -39,15 +40,21 @@ public class UC01RegistrarEmprestimoDeLivroV2 {
 	@Parameterized.Parameters
 	public static Collection primeNumbers() throws RuntimeException {
 		return Arrays.asList(new Object[][] { 
-			{ObtemLivro.comDadosValidos(), ObtemUsuario.comDadosValidos(), true },
-			{ObtemLivro.comISBNInvalido_branco() , ObtemUsuario.comDadosValidos(), false }
+			{ObtemLivro.comDadosValidos(), ObtemUsuario.comDadosValidos(), "valido" },
+			{null , ObtemUsuario.comDadosValidos(), "invalido" },
+			{ObtemLivro.comDadosValidos(), null, "invalido" }
 		});
 	}
 
 	// This test will run 4 times since we have 5 parameters defined
 	@Test
 	public void CT01UC01RegistrarEmprestimo() {
-		System.out.println("Parameterized Number is : ");
-		assertEquals(resultadoEsperado, servico.empresta(livro, usuario).equals(null));
+		System.out.println("Caso de teste executado : " + resultadoEsperado);
+		try {
+			Emprestimo resultadoObtido = servico.empresta(livro, usuario);
+			assertTrue(resultadoObtido.equals(ObtemEmprestimo.comDadosValidos()));
+		}catch(Exception e) {
+			assertTrue(resultadoEsperado.equals("invalido"));
+		}
 	}
 }

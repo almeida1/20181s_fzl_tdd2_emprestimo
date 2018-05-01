@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import br.emprestimo.modelo.Usuario;
 
-public class UC03CadastrarUsuario {
+public class UC10CadastrarUsuario {
     public static Usuario usuario;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

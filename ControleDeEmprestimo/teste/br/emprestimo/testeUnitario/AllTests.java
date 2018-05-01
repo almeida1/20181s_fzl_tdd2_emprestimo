@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ UC01RegistraEmprestimoDeLivro.class, UC03CadastrarUsuario.class, UC06CadastrarLivro.class })
+@SuiteClasses({ UC01RegistraEmprestimoDeLivro.class, UC10CadastrarUsuario.class, UC06CadastrarLivro.class })
 public class AllTests {
 
 }
