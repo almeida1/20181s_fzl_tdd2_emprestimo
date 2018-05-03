@@ -53,13 +53,14 @@ public class UC01RegistraEmprestimoDeLivro {
 	}
 	@Test
 	public void CT04UC01FB_registrar_emprestimo_com_sucesso_validacao_da_data() {
-		//acao
+		//cenario
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
 		String dataEsperada = new DateTime().plusDays(8).toString(fmt);
+		//acao
 		emprestimo = servico.empresta(livro, usuario);
 		String dataObtida = emprestimo.getDataDevolucao();
 		//verificacao
-	    assertTrue(dataEsperada.equals(dataObtida));
+		assertTrue(dataEsperada.equals(dataObtida));
 	}
 	@Test
 	public void CT05UC01FB_registrar_emprestimo_com_data_invalida() {
@@ -82,6 +83,36 @@ public class UC01RegistraEmprestimoDeLivro {
 	}
 	@Test
 	public void CT08UC01RegistrarEmprestimo_obtem_data_corrente(){
-		assertEquals("13/04/2018", emprestimo.setDataEmprestimo());
+		//cenario
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
+		String dataAtual = new DateTime().toString(fmt);
+		//acao
+		String dataEmprestimo = emprestimo.setDataEmprestimo();
+		assertTrue(dataAtual.equals(dataEmprestimo));
+	}
+	@Test
+	public void CT09QuandoForDomingoRecusarADevolucao(){
+		//cenario
+		Emprestimo umEmprestimo = new Emprestimo();
+		String data = "29/04/2018"; //domingo
+		//acao
+		boolean resultadoObtido = umEmprestimo.validaData(data);
+		//verificacao
+		assertFalse(resultadoObtido);
+	}
+	@Test
+	public void CT10QuandoForDomingoRecusarADevolucao(){
+		//cenario
+		Emprestimo umEmprestimo = new Emprestimo();
+		String data = "29/04/2018"; //domingo
+		//acao
+		try{
+		umEmprestimo.setDataDevolucao(data);
+		fail("Nao deveria aceitar uma data no domingo");
+		} catch(RuntimeException e){
+		//verificacao
+			String resultadoEsperado = "Data invalida";
+			assertTrue(resultadoEsperado.equals(e.getMessage()));
+		}
 	}
 }

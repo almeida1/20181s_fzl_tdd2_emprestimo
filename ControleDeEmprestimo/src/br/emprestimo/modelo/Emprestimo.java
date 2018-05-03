@@ -34,9 +34,9 @@ public class Emprestimo {
 		return dataEmprestimo;
 	}
 
-	public void setDataEmprestimo(String dataEmprestimo) {
-		if (validaData(dataEmprestimo))
-			this.dataEmprestimo = dataEmprestimo;
+	public void setDataEmprestimo(String dataE) {
+		if (validaData(dataE))
+			this.dataEmprestimo = dataE;
 		else
 			throw new RuntimeException("Data invalida");
 	}
@@ -45,21 +45,30 @@ public class Emprestimo {
 		return dataDevolucao;
 	}
 
-	public void setDataDevolucao(String data) {
-		this.dataDevolucao = data;
+	public void setDataDevolucao(String dataD) {
+		if (validaData(dataD))
+			this.dataDevolucao = dataD;
+		else
+			throw new RuntimeException("Data invalida");
 	}
-	public String setDataEmprestimo(){
+
+	public String setDataEmprestimo() {
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
 		return new DateTime().toString(fmt);
 	}
 
 	/**
-	 * * valida o formato da data * @param data no formato dd/MM/yyyy * @return
-	 * true se a data estiver no formato valido e false para formato invalido
+	 * valida o formato da data
+	 * 
+	 * @param data
+	 *            no formato dd/MM/yyyy
+	 * @return true se a data estiver no formato valido e false para formato
+	 *         invalido
 	 */
-	public boolean validaData(String data) {
+
+	public boolean validaCalendario(String data) {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		df.setLenient(false); //
+		df.setLenient(false); // mantem rigor em relacao a precisao
 		try {
 			df.parse(data); // data válida
 			return true;
@@ -68,15 +77,15 @@ public class Emprestimo {
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataDevolucao == null) ? 0 : dataDevolucao.hashCode());
-		result = prime * result + ((dataEmprestimo == null) ? 0 : dataEmprestimo.hashCode());
-		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		return result;
+	public boolean validaData(String data) {
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
+		boolean isValida=false;
+		if (validaCalendario(data)) {
+			DateTime umaData = fmt.parseDateTime(data);
+			if (umaData.dayOfWeek().getAsText() != "Domingo")
+				isValida = true;
+		} 
+		return isValida;
 	}
 
 	@Override

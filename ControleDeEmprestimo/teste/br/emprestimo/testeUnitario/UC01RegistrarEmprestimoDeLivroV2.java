@@ -27,9 +27,7 @@ public class UC01RegistrarEmprestimoDeLivroV2 {
 	public void initialize() {
 		servico = new ServicoEmprestimo();
 	}
-	// Each parameter should be placed as an argument here
-	// Every time runner triggers, it will pass the arguments
-	// from parameters we defined in primeNumbers() method
+	
 
 	public UC01RegistrarEmprestimoDeLivroV2(Livro umLivro, Usuario umUsuario, String resultadoEsperado) {
 		this.livro = umLivro;
@@ -46,9 +44,9 @@ public class UC01RegistrarEmprestimoDeLivroV2 {
 		});
 	}
 
-	// This test will run 4 times since we have 5 parameters defined
+	
 	@Test
-	public void CT01UC01RegistrarEmprestimo() {
+	public void CT01UC01ValidaComportamentoDoRegistroDeEmprestimo() {
 		System.out.println("Caso de teste executado : " + resultadoEsperado);
 		try {
 			Emprestimo resultadoObtido = servico.empresta(livro, usuario);
