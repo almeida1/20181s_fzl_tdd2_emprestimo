@@ -5,7 +5,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import br.emprestimo.modelo.Emprestimo;
-import br.emprestimo.modelo.Livro;
 
 public class ObtemEmprestimo {
 	

@@ -90,21 +90,12 @@ public class UC01RegistraEmprestimoDeLivro {
 		String dataEmprestimo = emprestimo.setDataEmprestimo();
 		assertTrue(dataAtual.equals(dataEmprestimo));
 	}
+	
 	@Test
 	public void CT09QuandoForDomingoRecusarADevolucao(){
 		//cenario
-		Emprestimo umEmprestimo = new Emprestimo();
 		String data = "29/04/2018"; //domingo
-		//acao
-		boolean resultadoObtido = umEmprestimo.validaData(data);
-		//verificacao
-		assertFalse(resultadoObtido);
-	}
-	@Test
-	public void CT10QuandoForDomingoRecusarADevolucao(){
-		//cenario
 		Emprestimo umEmprestimo = new Emprestimo();
-		String data = "29/04/2018"; //domingo
 		//acao
 		try{
 		umEmprestimo.setDataDevolucao(data);
@@ -114,5 +105,17 @@ public class UC01RegistraEmprestimoDeLivro {
 			String resultadoEsperado = "Data invalida";
 			assertTrue(resultadoEsperado.equals(e.getMessage()));
 		}
+	}
+	@Test
+	public void CT10quandoDataDevolucaoForDomingoRetornaTrue(){
+		//cenario
+		String data = "06/05/2018";//domingo
+		Emprestimo umEmprestimo = new Emprestimo();
+		//acao
+		//boolean ehDomingo = emprestimo.ehDomingo(data);
+		//verificacao
+		//assertTrue(ehDomingo);
+		
+		
 	}
 }
