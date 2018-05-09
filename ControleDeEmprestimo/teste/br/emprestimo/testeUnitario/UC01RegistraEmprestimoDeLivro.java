@@ -36,6 +36,7 @@ public class UC01RegistraEmprestimoDeLivro {
 	}
 	@Test
 	public void CT01UC01FB_registrar_emprestimo_com_sucesso() {
+		Emprestimo umEmprestimo = servico.empresta(livro, usuario);
 		assertNotNull(servico.empresta(livro, usuario));
 	}
 	@Test(expected=RuntimeException.class)
@@ -102,7 +103,7 @@ public class UC01RegistraEmprestimoDeLivro {
 		fail("Nao deveria aceitar uma data no domingo");
 		} catch(RuntimeException e){
 		//verificacao
-			String resultadoEsperado = "Data invalida";
+			String resultadoEsperado = "Data invalida - domingo";
 			assertTrue(resultadoEsperado.equals(e.getMessage()));
 		}
 	}
@@ -112,10 +113,18 @@ public class UC01RegistraEmprestimoDeLivro {
 		String data = "06/05/2018";//domingo
 		Emprestimo umEmprestimo = new Emprestimo();
 		//acao
-		//boolean ehDomingo = emprestimo.ehDomingo(data);
+		boolean ehDomingo = emprestimo.ehDomingo(data);
 		//verificacao
-		//assertTrue(ehDomingo);
-		
-		
+		assertTrue(ehDomingo);
+	}
+	@Test
+	public void CT11quandoDataDevolucaoNaoForDomingoRetornaFalse(){
+		//cenario
+		String data = "08/05/2018";//terca-feira
+		Emprestimo umEmprestimo = new Emprestimo();
+		//acao
+		boolean ehDomingo = emprestimo.ehDomingo(data);
+		//verificacao
+		assertFalse(ehDomingo);
 	}
 }

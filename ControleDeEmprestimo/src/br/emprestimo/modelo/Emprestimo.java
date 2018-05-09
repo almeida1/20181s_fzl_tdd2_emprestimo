@@ -46,10 +46,10 @@ public class Emprestimo {
 	}
 
 	public void setDataDevolucao(String dataD) {
-		if (verificaDiaDaSemana(dataD))
+		if (ehDomingo(dataD) == false)
 			this.dataDevolucao = dataD;
 		else
-			throw new RuntimeException("Data invalida");
+			throw new RuntimeException("Data invalida - domingo");
 	}
 
 	public String setDataEmprestimo() {
@@ -77,14 +77,16 @@ public class Emprestimo {
 		}
 	}
 
-	public boolean verificaDiaDaSemana(String data) {
+	
+	public boolean ehDomingo(String data) {
+		boolean isValida = false;
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
-		boolean isValida=false;
-		if (validaData(data)) {
+		if (validaData(data) == true) {
 			DateTime umaData = fmt.parseDateTime(data);
-			if (umaData.dayOfWeek().getAsText() != "Domingo")
+			if (umaData.dayOfWeek().getAsText().equals("Domingo")){
 				isValida = true;
-		} 
+			}
+		}
 		return isValida;
 	}
 
